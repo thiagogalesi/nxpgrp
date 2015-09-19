@@ -13,7 +13,7 @@ class FileReader(object):
     def process_file(self, f):
         items = []
         count = 0
-        for l in f.readlines():
+        for l in f:
             rem = self.re.search(l)
             line_ok = False
             if rem:
@@ -21,16 +21,15 @@ class FileReader(object):
                 if self.nre:
                     if self.nre.search(l):
                         line_ok = False
-            if line_ok:
-                line_data = {'line':count, 'text':l.strip('\n').strip(),
+            if not line_ok:
+                count += 1
+                continue
+
+            line_data = {'line':count, 'text':l.strip('\n').strip(),
                                     'span':rem.span(), 'file':f.name}
-                items.append(line_data)
-                if self.item_visit:
-                    self.item_visit(line_data)
+            items.append(line_data)
+            if self.item_visit:
+                self.item_visit(line_data)
             count += 1
+
         return items
-
-
-
-
-
