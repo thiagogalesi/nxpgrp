@@ -3,8 +3,8 @@ import argparse
 import os
 import sys
 
-import nxgr.file_finder
-import nxgr.file_reader
+from file_finder import FileFinder
+from file_reader import FileReader
 
 def process_args():
     parser = argparse.ArgumentParser('nxgr')
@@ -32,9 +32,9 @@ def file_process_visit(reader):
 if __name__=='__main__':
     main()
 
-def main()
+def main():
     args = vars(process_args())
-    fr = file_reader.FileReader(pattern=args['re'],
+    fr = FileReader(pattern=args['re'],
                                 negpat=args['nre'],
                                 item_visit=print_results)
     frgx = args.get('frgx')
@@ -42,7 +42,7 @@ def main()
     if args.get('fx'):
         frgx = r'\.%s$'%(args.get('fx'),)
 
-    ff = file_finder.FileFinder(file_re=frgx,file_nre=args['fnrgx'],
+    ff = FileFinder(file_re=frgx,file_nre=args['fnrgx'],
                                         visit=file_process_visit(fr))
     ff.read_directory(args['files'])
 
