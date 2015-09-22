@@ -1,3 +1,6 @@
 build
 dist
 nxgr.egg-info
+*.pyc
+*.pyo
+

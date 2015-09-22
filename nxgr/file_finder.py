@@ -24,8 +24,9 @@ class FileFinder(object):
 
     def read_directory(self, files, recurse=True):
         all_files = []
-        #print files
         for f in files:
+            if '.vol' in f:
+                continue
             try:
                 mode = os.stat(f)[stat.ST_MODE]
             except Exception as e:
@@ -39,7 +40,6 @@ class FileFinder(object):
                     dir_list = []
             else:
                 dir_list = [f]
-            #print dir_list
             for ff in dir_list:
                 if self._isdir(f):
                     ffullpath = os.path.join(f, ff)
@@ -74,7 +74,3 @@ if __name__=='__main__':
     ff = FileFinder(visit=print_name)
     initial = sys.argv[1]
     ff.read_directory([initial])
-
-
-
-
