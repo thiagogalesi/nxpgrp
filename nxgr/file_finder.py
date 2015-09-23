@@ -4,7 +4,9 @@ import stat
 import sys
 import re
 
+
 class FileFinder(object):
+
     def __init__(self, file_re=None, file_nre=None, visit=None):
         self.file_re = None
         self.file_nre = None
@@ -36,7 +38,7 @@ class FileFinder(object):
                 try:
                     dir_list = os.listdir(f)
                 except OSError as e:
-                    sys.stderr.write('Error: %s\n'%(e,))
+                    sys.stderr.write('Error: %s\n' % (e,))
                     dir_list = []
             else:
                 dir_list = [f]
@@ -59,7 +61,7 @@ class FileFinder(object):
                     if self.file_nre:
                         if self.file_nre.search(ffullpath):
                             file_ok = False
-                        #else:
+                        # else:
                         #    file_ok = True
                     if file_ok:
                         all_files.append(ffullpath)
@@ -67,10 +69,11 @@ class FileFinder(object):
                             self.visit(ffullpath)
         return all_files
 
+
 def print_name(f):
     print f
 
-if __name__=='__main__':
+if __name__ == '__main__':
     ff = FileFinder(visit=print_name)
     initial = sys.argv[1]
     ff.read_directory([initial])

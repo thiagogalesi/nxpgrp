@@ -2,6 +2,7 @@ import re
 
 
 class FileReader(object):
+
     def __init__(self, pattern, negpat=None, item_visit=None):
         self.re = re.compile(pattern)
         if negpat:
@@ -25,8 +26,8 @@ class FileReader(object):
                 count += 1
                 continue
 
-            line_data = {'line':count, 'text':l.strip('\n').strip(),
-                                    'span':rem.span(), 'file':f.name}
+            line_data = {'line': count, 'text': l.strip('\n').strip(),
+                         'span': rem.span(), 'file': f.name}
             items.append(line_data)
             if self.item_visit:
                 self.item_visit(line_data)
