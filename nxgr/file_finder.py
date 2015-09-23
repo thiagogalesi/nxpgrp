@@ -32,7 +32,7 @@ class FileFinder(object):
             try:
                 mode = os.stat(f)[stat.ST_MODE]
             except Exception as e:
-                print e
+                sys.stderr.write('Error: %s\n' % (e,))
                 continue
             if stat.S_ISDIR(mode) and not stat.S_ISLNK(mode):
                 try:
@@ -71,7 +71,7 @@ class FileFinder(object):
 
 
 def print_name(f):
-    print f
+    sys.stdout.write('%s\n' % (f,))
 
 if __name__ == '__main__':
     ff = FileFinder(visit=print_name)

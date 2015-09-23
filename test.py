@@ -9,7 +9,7 @@ from nxgr.file_finder import FileFinder
 class TestFileReader(unittest.TestCase):
 
     def setUp(self):
-        self.temp = tempfile.NamedTemporaryFile()
+        self.temp = tempfile.NamedTemporaryFile('w+t')
         self.fr = FileReader('pattern','negative')
 
     def test_search(self):

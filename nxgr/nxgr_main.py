@@ -1,4 +1,6 @@
 #!/usr/bin/env python
+from __future__ import print_function
+
 import argparse
 import os
 import sys
@@ -22,7 +24,7 @@ def process_args():
 
 
 def print_results(data):
-    print "{file} +{line}   |{text} ".format(**data)
+    print ("{file} +{line}   |{text} ".format(**data))
 
 
 def file_process_visit(reader):
